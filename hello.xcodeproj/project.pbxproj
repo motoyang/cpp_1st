@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7551537A1C073AE600A9222F /* widget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 755153781C073AE600A9222F /* widget.cpp */; };
 		75F5667A1C05EA8E00BE979E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75F566791C05EA8E00BE979E /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		755153781C073AE600A9222F /* widget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = widget.cpp; sourceTree = "<group>"; };
+		755153791C073AE600A9222F /* widget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = widget.h; sourceTree = "<group>"; };
+		75AF141A1C2ACD530012C18E /* printtuple.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = printtuple.hpp; sourceTree = "<group>"; };
 		75F566761C05EA8E00BE979E /* hello */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hello; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F566791C05EA8E00BE979E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +62,9 @@
 			isa = PBXGroup;
 			children = (
 				75F566791C05EA8E00BE979E /* main.cpp */,
+				755153781C073AE600A9222F /* widget.cpp */,
+				755153791C073AE600A9222F /* widget.h */,
+				75AF141A1C2ACD530012C18E /* printtuple.hpp */,
 			);
 			path = hello;
 			sourceTree = "<group>";
@@ -119,6 +126,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75F5667A1C05EA8E00BE979E /* main.cpp in Sources */,
+				7551537A1C073AE600A9222F /* widget.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +213,7 @@
 		75F5667E1C05EA8E00BE979E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -212,6 +221,7 @@
 		75F5667F1C05EA8E00BE979E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -235,6 +245,7 @@
 				75F5667F1C05EA8E00BE979E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
