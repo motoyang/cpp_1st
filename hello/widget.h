@@ -17,7 +17,7 @@ class Widget {
     
 public:
     Widget();
-    ~Widget();
+    virtual ~Widget();
     
     Widget(Widget&& w);
     Widget& operator= (Widget&& w);
