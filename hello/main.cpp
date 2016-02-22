@@ -10,103 +10,67 @@
 #include <memory>
 #include <sstream>
 #include <vector>
+#include <cassert>
 #include "printtuple.hpp"
 #include "widget.h"
+#include "person.h"
+#include "boost/anyshow.hpp"
+#include "boost/optional.hpp"
 
 /*
-template <typename T, typename... Ts>
-std::unique_ptr<T> make_unique(Ts&&... params) {
+ template <typename T, typename... Ts>
+ std::unique_ptr<T> make_unique(Ts&&... params) {
     return std::unique_ptr<T>(new T(std::forward<Ts>(params)...));
-}
-*/
-
-/* c++ 14 version
-class Person {
-    std::string name;
-public:
-    template<
-    typename T,
-    typename = std::enable_if_t<
-    !std::is_base_of<Person, std::decay_t<T>>::value
-    &&
-    !std::is_integral<std::remove_reference_t<T>>::value
-    >
-    >
-    explicit Person(T&& n)
-        : name(std::forward<T>(n))
-    {
-        // assert that a std::string can be created from a T object
-        static_assert(
-                      std::is_constructible<std::string, T>::value,
-                      "Parameter n can't be used to construct a std::string"
-                      );
-    }
-    
-    explicit Person(int n)
-    {
-        std::ostringstream oss;
-        oss << "name is " << n;
-        name = oss.str();
-    }
-    
-    std::string get_name() {
-        return name;
-    }
-};
-*/
-
-// c++ 11 version
-class Person {
-    std::string name;
-public:
-    template<
-    typename T,
-    typename = typename std::enable_if<
-    !std::is_base_of<Person, typename std::decay<T>::type>::value
-    &&
-    !std::is_integral<typename std::remove_reference<T>::type>::value
-    >::type
-    >
-    explicit Person(T&& n)
-    : name(std::forward<T>(n))
-    {
-        // assert that a std::string can be created from a T object
-        static_assert(
-                      std::is_constructible<std::string, T>::value,
-                      "Parameter n can't be used to construct a std::string"
-                      );
-    }
-    
-    explicit Person(int n)
-    {
-        std::ostringstream oss;
-        oss << "name is " << n;
-        name = oss.str();
-    }
-    
-    std::string get_name() {
-        return name;
-    }
-};
-
+ }
+ */
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
 
+    // 验证boost/any特性
+    std::tuple<int, std::string, double, std::string> t1 {111, "string2", 2.3333, "string3"};
+    std::vector<int> vi {111, 222, 333, 444, 555};
+    xtyang::any a1(1), a2(std::string("string")), a3(1.3333), a4(t1), a5(vi);
+    std::cout << t1 << std::endl;
+    std::cout << vi << std::endl;
+    std::cout << a1 << ", "
+        << a2 << ", "
+        << a3 << ", "
+        << a4 << ", "
+        << a5 << std::endl;
+    
+    // 验证printtuple
     std::tuple<int, std::string, double, std::string> t{1, "a", 2.2, "bb"};
     std::cout << t << std::endl;
     
+    // 验证print多个不同类型参数
     print(std::cout, 1, 1.2, 2.3, "abc", std::bitset<16>(377), "ddd");
     
+    // 验证Widget中的impl方式
     Widget w;
     Widget w2 = w;
     Widget w3(w2);
     Widget w4 = std::move(w);
     
+    // 验证Person的类定义
     Person p("pppp");
     std::cout << p.get_name() << std::endl;
     Person pp2(12);
     std::cout << pp2.get_name() << std::endl;
+    
+    // 验证unique_ptr管理原始指针
+    auto up1 = std::make_unique<char[]>(20);
+    char* cp1 = up1.get();
+    strcpy(cp1, "hello, wwwww!");
+    for (int i = 0; i < 20; i++) {
+        up1[i]=8;
+    }
+    
+    // 验证vector管理存储buffer
+    std::vector<char> vp1 {1, 2, 3, 4, 5, 6};
+    std::for_each(std::begin(vp1), std::end(vp1), [](char c) { c = 8; });
+    vp1.resize(20);
+    char* cp2 = vp1.data();
+    strcpy(cp2, "wowwww, yes");
     
     auto ptr = std::make_shared<int>(10);
     auto p2 = std::make_unique<std::string>("aaaaa");
