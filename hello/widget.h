@@ -12,7 +12,7 @@
 #include <memory>
 
 class Widget {
-    static int m_count;
+    static int widget;
     struct Impl;
     std::unique_ptr<Impl> m_i;
     
